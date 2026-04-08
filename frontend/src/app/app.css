@@ -1,0 +1,182 @@
+/* Layout base */
+.container {
+  min-height: 100vh;
+  padding: 2rem 1rem 3rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 1rem;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  color: #101828;
+}
+
+.hero p {
+  margin: 0.3rem 0 0;
+  color: #475467;
+}
+
+/* Tarjetas principales */
+.card {
+  background: #ffffff;
+  border: 1px solid #e4e7ec;
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-top: 1rem;
+  box-shadow: 0 8px 28px rgba(16, 24, 40, 0.06);
+}
+
+/* Formulario */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.8rem;
+  align-items: end;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  color: #344054;
+  font-size: 0.9rem;
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+input,
+select {
+  border: 1px solid #d0d5dd;
+  border-radius: 10px;
+  padding: 0.58rem 0.72rem;
+  background: #fff;
+}
+
+button {
+  border: none;
+  background: #0f766e;
+  color: #fff;
+  padding: 0.62rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+button[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Encabezado de seccion y filtros */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.section-header h2,
+.card h2 {
+  margin: 0 0 0.7rem;
+}
+
+.filters {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  background: #f2f4f7;
+  color: #344054;
+}
+
+.filters button.active {
+  background: #175cd3;
+  color: #fff;
+}
+
+.refresh-btn {
+  background: #1d4ed8;
+  margin-bottom: 0.75rem;
+}
+
+/* Listado de citas */
+.appointments {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.appointment-card {
+  border: 1px solid #eaecf0;
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.appointment-card h3 {
+  margin: 0 0 0.3rem;
+}
+
+.appointment-card p {
+  margin: 0.15rem 0;
+  color: #475467;
+}
+
+.actions {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Estados visuales */
+.status {
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+}
+
+.status.pending {
+  background: #fef0c7;
+  color: #92400e;
+}
+
+.status.done {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.cancelled {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Mensajes de feedback */
+.error {
+  color: #b42318;
+  margin: 0.6rem 0 0;
+}
+
+.success {
+  color: #067647;
+  margin: 0.6rem 0 0;
+}
+
+.loading {
+  color: #175cd3;
+  margin: 0.6rem 0 0;
+}

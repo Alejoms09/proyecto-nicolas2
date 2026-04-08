@@ -1,0 +1,17 @@
+/* Normalizacion basica */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* Estilo global de la aplicacion */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #f3f4f6 100%);
+  color: #101828;
+}

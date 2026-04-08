@@ -1,0 +1,98 @@
+<main class="container">
+  <!-- Encabezado principal -->
+  <header class="hero">
+    <h1>BookIt</h1>
+    <p>Sistema de reservas de citas</p>
+  </header>
+
+  <!-- Formulario de creacion de citas -->
+  <section class="card">
+    <h2>Nueva cita</h2>
+    <form class="form-grid" (ngSubmit)="createAppointment()">
+      <label>
+        Nombre del cliente
+        <input [(ngModel)]="form.clientName" name="clientName" placeholder="Ej: Laura Gomez" required />
+      </label>
+
+      <label>
+        Correo del cliente
+        <input [(ngModel)]="form.clientEmail" type="email" name="clientEmail" placeholder="cliente@correo.com" required />
+      </label>
+
+      <label>
+        Fecha
+        <input [(ngModel)]="form.date" type="date" name="date" required />
+      </label>
+
+      <label>
+        Hora
+        <input [(ngModel)]="form.time" type="time" name="time" required />
+      </label>
+
+      <label>
+        Servicio
+        <select [(ngModel)]="form.serviceId" name="serviceId" required>
+          <option value="" disabled selected>Selecciona un servicio</option>
+          <option *ngFor="let service of services" [value]="service.id">
+            {{ service.name }} ({{ service.durationMinutes }} min)
+          </option>
+        </select>
+      </label>
+
+      <button type="submit" [disabled]="isSubmitting">Registrar cita</button>
+    </form>
+
+    <p class="loading" *ngIf="isLoadingServices">Cargando servicios...</p>
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </section>
+
+  <!-- Listado y acciones de citas -->
+  <section class="card">
+    <div class="section-header">
+      <h2>Citas</h2>
+      <div class="filters">
+        <!-- Filtro por estado -->
+        <button *ngFor="let status of statuses"
+                type="button"
+                [ngClass]="{ active: selectedStatus === status }"
+                (click)="onFilterChange(status)">
+          {{ status === 'ALL' ? 'Todas' : statusLabel(status) }}
+        </button>
+      </div>
+    </div>
+
+    <p class="loading" *ngIf="isLoadingAppointments">Cargando citas...</p>
+    <button class="refresh-btn" type="button" (click)="loadAppointments()" [disabled]="isLoadingAppointments">
+      Recargar citas
+    </button>
+
+    <!-- Tarjetas de citas -->
+    <div class="appointments" *ngIf="!isLoadingAppointments">
+      <article class="appointment-card" *ngFor="let appointment of appointments; trackBy: trackByAppointmentId">
+        <div>
+          <h3>{{ appointment.clientName }}</h3>
+          <p>{{ appointment.clientEmail }}</p>
+          <p>{{ appointment.service.name }} - {{ appointment.service.durationMinutes }} min</p>
+          <p>{{ appointment.date }} {{ appointment.time }}</p>
+        </div>
+        <div class="actions">
+          <span class="status" [ngClass]="appointment.status.toLowerCase()">{{ statusLabel(appointment.status) }}</span>
+          <!-- Acciones disponibles solo cuando esta pendiente -->
+          <button type="button"
+                  (click)="markAsDone(appointment.id)"
+                  [disabled]="appointment.status !== 'PENDING'">
+            Marcar atendida
+          </button>
+          <button type="button"
+                  (click)="cancelAppointment(appointment.id)"
+                  [disabled]="appointment.status !== 'PENDING'">
+            Cancelar
+          </button>
+        </div>
+      </article>
+
+      <p *ngIf="appointments.length === 0">No hay citas para el filtro seleccionado.</p>
+    </div>
+  </section>
+</main>
